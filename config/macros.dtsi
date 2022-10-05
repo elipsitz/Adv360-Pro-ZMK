@@ -40,7 +40,8 @@ macro_ctrl_option_cmd: macro_ctrl_option_cmd{
   label = "macro_ctrl_option_cmd";
   #binding-cells = <0>;
   bindings
-    = <&macro_press &kp LCTRL &kp LALT &kp LCMD>
+    = <&macro_wait_time 20>
+    , <&macro_press &kp LCTRL &kp LALT &kp LCMD>
     , <&macro_pause_for_release>
     , <&macro_release &kp LCTRL &kp LALT &kp LCMD>
     ;
