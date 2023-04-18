@@ -9,7 +9,7 @@
         compatible = "zmk,combos";
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <46 35>; /* 46 = left "shift" key, 35 = left "cmd" key */
+            key-positions = <42 66>; /* 42 = left "shift" key, 66 = left "cmd" key */
             bindings = <&macro_ctrl_option_cmd>;
         };
     };
