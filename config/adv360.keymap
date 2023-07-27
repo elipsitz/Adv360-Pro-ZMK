@@ -5,6 +5,15 @@
 #include <dt-bindings/zmk/backlight.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        combo_lshift_lcmd {
+            timeout-ms = <50>;
+            key-positions = <46 35>; /* 46 = left "shift" key, 35 = left "cmd" key */
+            bindings = <&macro_ctrl_option_cmd>;
+        };
+    };
+
     behaviors {
       #include "macros.dtsi"
       #include "version.dtsi"
@@ -28,6 +37,24 @@
       };
     };
 
+  // DEFAULT
+  // ------------------------------------------------------------------------          -------------------------------------------------------------------------
+  // |   = +    |    1    |    2    |    3    |    4    |    5    |  [kp]   |          |  [mod]  |    6    |    7    |    8    |    9    |    0     |   - _    |
+  // |   TAB    |    Q    |    W    |    E    |    R    |    T    |  None   |          |  None   |    Y    |    U    |    I    |    O    |    P     |   \ |    |
+  // |   [fn]   |    A    |    S    |    D    |    F    |    G    |  None   |          |  None   |    H    |    J    |    K    |    L    |    ;     |   ' "    |
+  // |  LSHIFT  |    Z    |    X    |    C    |    V    |    B    |----------          ----------|    N    |    M    |    ,    |    .    |    /     |  RSHIFT  |
+  // |   ESC    |   ` ~   |  CAPS   |  LEFT   |  RIGHT  |----------                              ----------|   UP    |  DOWN   |    [    |    ]     |          |
+  // ----------------------------------------------------                                                  -----------------------------------------------------
+  //
+  //                                                                        Thumb Cluster
+  //                                                       -----------------           ------------------
+  //                                                       | LCMD  | LALT  |           | RCTRL |  RCMD  |
+  //                                               -------------------------           ---------------------------
+  //                                               |       |       | HOME  |           | PG UP |        |        |
+  //                                               | BKSP  |  DEL  |--------           --------|  ENTER | SPACE  |
+  //                                               |       |       | END   |           | PG DN |        |        |
+  //                                               -------------------------           ---------------------------
+
   keymap {
     compatible = "zmk,keymap";
 
@@ -35,27 +62,27 @@
       bindings = <
         &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &tog 1                                                           &mo 3 &kp N6 &kp N7 &kp N8    &kp N9   &kp N0   &kp MINUS
         &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp U  &kp I     &kp O    &kp P    &kp BSLH
-        &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp J  &kp K     &kp L    &kp SEMI &kp SQT
+        &mo 2     &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCMD  &kp LALT &kp RCTRL &kp RCMD            &none &kp H  &kp J  &kp K     &kp L    &kp SEMI &kp SQT
         &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
-        &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp SPACE              &kp UP &kp DOWN  &kp LBKT &kp RBKT &mo 2
+        &kp ESC   &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp SPACE              &kp UP &kp DOWN  &kp LBKT &kp RBKT &mo 2
       >;
     };
     keypad {
       bindings = <
         &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &trans                                                           &mo 3 &kp N6 &kp KP_NUM &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp MINUS
         &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp KP_N7  &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp BSLH
-        &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp KP_N4  &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &kp SQT
+        &mo 2     &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCMD  &kp LALT &kp RCTRL &kp RCMD            &none &kp H  &kp KP_N4  &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &kp SQT
         &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp KP_N1  &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &kp RSHFT
-        &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp KP_N0              &kp UP     &kp DOWN     &kp KP_DOT    &kp RBKT        &mo 2
+        &kp ESC   &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp KP_N0              &kp UP     &kp DOWN     &kp KP_DOT    &kp RBKT        &mo 2
       >;
     };
     fn {
       bindings = <
-        &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &tog 1                                           &mo 3 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-        &trans &trans &trans &trans &trans &trans  &none                                           &none &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans &trans  &none        &trans &trans &trans &trans        &none &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans &trans                      &trans &trans                     &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans              &trans &trans &trans  &trans  &trans
+        &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &tog 1                                           &mo 3 &kp F7 &kp F8   &kp F9   &kp F10    &kp F11 &kp F12
+        &trans &trans &trans &trans &trans &trans  &none                                           &none &trans &trans   &kp UP   &trans     &trans  &trans
+        &trans &trans &trans &trans &trans &trans  &none        &trans &trans &trans &trans        &none &trans &kp LEFT &kp DOWN &kp RIGHT  &trans  &trans
+        &trans &trans &trans &trans &trans &trans                      &trans &trans                     &trans &trans   &trans   &trans     &trans  &trans
+        &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans              &trans   &trans   &trans     &trans  &trans
       >;
     };
     mod {
